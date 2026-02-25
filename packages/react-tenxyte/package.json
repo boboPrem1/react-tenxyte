@@ -1,0 +1,35 @@
+{
+  "name": "react-tenxyte",
+  "version": "0.1.0",
+  "description": "Django authentication complete package â€” JWT, RBAC, 2FA, Magic Links, Passkeys, Social, Organizations B2B support for React/Next.js",
+  "author": "Tenxyte",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "jsdom": "^28.1.0",
+    "msw": "^2.12.10",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "vitest": "^4.0.18"
+  }
+}
