@@ -88,4 +88,25 @@ export class AuthAPI {
             body: JSON.stringify({ code }),
         });
     }
+
+    public async requestPasswordReset(email: string): Promise<{ message: string }> {
+        return this.client.fetch('/password/reset/request/', {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+        });
+    }
+
+    public async confirmPasswordReset(data: { email: string; code: string; new_password: string }): Promise<{ message: string }> {
+        return this.client.fetch('/password/reset/confirm/', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+    }
+
+    public async changePassword(data: { old_password: string; new_password: string }): Promise<{ message: string }> {
+        return this.client.fetch('/password/change/', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+    }
 }

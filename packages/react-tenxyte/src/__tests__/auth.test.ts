@@ -71,6 +71,18 @@ const handlers = [
 
     http.post(`${MOCK_API}/otp/verify/phone/`, async () => {
         return HttpResponse.json({ message: 'Phone verified' }, { status: 200 });
+    }),
+
+    http.post(`${MOCK_API}/password/reset/request/`, async () => {
+        return HttpResponse.json({ message: 'Password reset email sent' }, { status: 200 });
+    }),
+
+    http.post(`${MOCK_API}/password/reset/confirm/`, async () => {
+        return HttpResponse.json({ message: 'Password reset successful' }, { status: 200 });
+    }),
+
+    http.post(`${MOCK_API}/password/change/`, async () => {
+        return HttpResponse.json({ message: 'Password changed successfully' }, { status: 200 });
     })
 ];
 
@@ -160,8 +172,18 @@ describe('AuthAPI', () => {
         expect(res.message).toBe('Email verified');
     });
 
-    it('verifies phone OTP', async () => {
-        const res = await auth.verifyPhoneOTP('123456');
-        expect(res.message).toBe('Phone verified');
+    it('requests password reset', async () => {
+        const res = await auth.requestPasswordReset('test@example.com');
+        expect(res.message).toBe('Password reset email sent');
+    });
+
+    it('confirms password reset', async () => {
+        const res = await auth.confirmPasswordReset({ email: 'test@example.com', code: '123456', new_password: 'pass' });
+        expect(res.message).toBe('Password reset successful');
+    });
+
+    it('changes password', async () => {
+        const res = await auth.changePassword({ old_password: 'old', new_password: 'new' });
+        expect(res.message).toBe('Password changed successfully');
     });
 });
